@@ -1,6 +1,7 @@
 package com.example.mahmoud.bakingapp;
 
 import android.text.TextUtils;
+import android.util.Log;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,9 +24,8 @@ import java.util.List;
 
 public class BakingUtils  {
 
-    public static String BAKING_JSON= "https://d17h27t6h515a5.cloudfront.net/topher/2017/May/59121517_baking/baking.json";
 
-
+    private static final String LOG_MEG =BakingUtils.class.getSimpleName();
 
     private static List<BakingDetail> extractBaking(String bakingJson){
         if(TextUtils.isEmpty(bakingJson)){
@@ -99,5 +99,17 @@ public class BakingUtils  {
             }
         }
         return jsonResponse;
+    }
+    public static List<BakingDetail> fetchBakingData(String requestUrl){
+        URL url = createURl(requestUrl);
+        String jsonResponse = null;
+        try {
+            jsonResponse = makeHttpRequest(url);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        List<BakingDetail> bakingList = extractBaking(jsonResponse);
+
+        return bakingList;
     }
 }
