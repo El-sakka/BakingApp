@@ -1,11 +1,10 @@
-package com.example.mahmoud.bakingapp.Model;
+package com.example.mahmoud.bakingapp.Loader;
 
 import android.content.AsyncTaskLoader;
 import android.content.Context;
-import android.util.Log;
 
-import com.example.mahmoud.bakingapp.BakingDetail;
-import com.example.mahmoud.bakingapp.BakingUtils;
+import com.example.mahmoud.bakingapp.Model.BakingDetail;
+import com.example.mahmoud.bakingapp.Utils.BakingUtils;
 
 import java.util.List;
 

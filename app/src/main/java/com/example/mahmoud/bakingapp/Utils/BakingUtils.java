@@ -1,7 +1,11 @@
-package com.example.mahmoud.bakingapp;
+package com.example.mahmoud.bakingapp.Utils;
 
 import android.text.TextUtils;
 import android.util.Log;
+
+import com.example.mahmoud.bakingapp.Model.BakingDetail;
+import com.example.mahmoud.bakingapp.Model.BakingIngrediant;
+import com.example.mahmoud.bakingapp.Model.BakingSteps;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,13 +36,71 @@ public class BakingUtils  {
             return null;
         }
         List<BakingDetail> bakingList = new ArrayList<>();
+        String recipeCard;
+        int servings;
 
+        String ingrediantsMeasure = null;
+        String ingrediantsIngredient= null;
+        int ingrediantsQuantity= 0;
+
+        int stepId=0;
+        String stepShortDescription= null;
+        String stepDescription=null;
+        String stepVideoUrl=null;
+        String stepThumbnailUrl=null;
+
+
+        List<BakingIngrediant> ingrediantList = new ArrayList<>();
+        List<BakingSteps> stepsList = new ArrayList<>();
         try {
             JSONArray jsonRoot = new JSONArray(bakingJson);
             for(int i=0;i<jsonRoot.length();i++){
                 JSONObject jsonObject = jsonRoot.getJSONObject(i);
-                String name = jsonObject.getString("name");
-                bakingList.add(new BakingDetail(name));
+                recipeCard = jsonObject.getString("name");
+                servings = jsonObject.getInt("servings");
+               // bakingList.add(new BakingDetail(name));
+                JSONArray ingrediants = jsonObject.getJSONArray("ingredients");
+                JSONArray steps = jsonObject.getJSONArray("steps");
+                for(int k=0;k<ingrediants.length();k++){
+                    JSONObject ingrediantObject = ingrediants.getJSONObject(k);
+                    ingrediantsQuantity = ingrediantObject.getInt("quantity");
+                    ingrediantsMeasure = ingrediantObject.getString("measure");
+                    ingrediantsIngredient = ingrediantObject.getString("ingredient");
+
+                    ingrediantList.add(
+                            new BakingIngrediant(ingrediantsMeasure,
+                                    ingrediantsIngredient,
+                                    ingrediantsQuantity)
+                    );
+
+                }
+                for(int k = 0;k<steps.length();k++){
+                    JSONObject stepObject = steps.getJSONObject(k);
+                    stepId = stepObject.getInt("id");
+                    stepShortDescription = stepObject.getString("shortDescription");
+                    stepDescription= stepObject.getString("description");
+                    stepVideoUrl = stepObject.getString("videoURL");
+                    stepThumbnailUrl = stepObject.getString("thumbnailURL");
+
+                    stepsList.add(
+                            new BakingSteps(stepId,
+                                    stepShortDescription,
+                                    stepDescription,
+                                    stepVideoUrl,
+                                    stepThumbnailUrl)
+                    );
+
+                }
+                bakingList.add(
+                        new BakingDetail(
+                                recipeCard,
+                                servings,
+                                ingrediantList,
+                                stepsList
+                        )
+                );
+               ingrediantList.clear();
+               stepsList.clear();
             }
         } catch (JSONException e) {
             e.printStackTrace();

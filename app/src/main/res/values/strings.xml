@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">BakingApp</string>
+    <string name="RecipeCard">Recipe Card</string>
+    <string name="serving">serving</string>
 </resources>
