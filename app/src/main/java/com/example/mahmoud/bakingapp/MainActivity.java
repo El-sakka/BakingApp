@@ -78,7 +78,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
         Intent intent = new Intent(MainActivity.this,IngrediantActivity.class);
         BakingDetail bakingObject = mBakingList.get(clickedItemIndex);
         //Log.i(LOG_MEG,bakingObject.getStepsList().size()+"##");
-        intent.putExtra("T",bakingObject);
+        intent.putExtra(Intent.EXTRA_TEXT,bakingObject);
 
         startActivity(intent);
     }
