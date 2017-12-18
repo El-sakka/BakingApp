@@ -29,9 +29,25 @@ public class BakingDetail implements Parcelable{
         this.stepsList = stepsList;
     }
 
+
     protected BakingDetail(Parcel in) {
+        Ingrediantlist = in.createTypedArrayList(BakingIngrediant.CREATOR);
+        stepsList = in.createTypedArrayList(BakingSteps.CREATOR);
         recipeCard = in.readString();
         servings = in.readInt();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeTypedList(Ingrediantlist);
+        dest.writeTypedList(stepsList);
+        dest.writeString(recipeCard);
+        dest.writeInt(servings);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     public static final Creator<BakingDetail> CREATOR = new Creator<BakingDetail>() {
@@ -85,15 +101,4 @@ public class BakingDetail implements Parcelable{
         this.servings = servings;
     }
 
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(recipeCard);
-        dest.writeInt(servings);
-    }
 }

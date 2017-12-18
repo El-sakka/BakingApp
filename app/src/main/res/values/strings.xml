@@ -2,4 +2,8 @@
     <string name="app_name">BakingApp</string>
     <string name="RecipeCard">Recipe Card</string>
     <string name="serving">serving</string>
+    <string name="tap_here_for_this_recipe_s_ingredients">Tap here for this recipe\'s Ingredients</string>
+    <string name="steps">Steps</string>
+    <string name="step">Step</string>
+    <string name="description">description</string>
 </resources>

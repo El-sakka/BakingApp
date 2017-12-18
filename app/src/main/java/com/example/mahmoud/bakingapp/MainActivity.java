@@ -54,8 +54,7 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     @Override
     public void onLoadFinished(Loader<List<BakingDetail>> loader, List<BakingDetail> data) {
         //Log.i(LOG_MEG,data.get(0).getRecipeCard());
-//        int q = data.get(0).getList().get(0).getIngrediantsQuantity();
-//        Log.i(LOG_MEG,q+"#");
+
 
         mBakingList = data;
         mAdapter.setBakingData(data);
@@ -78,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
 
         Intent intent = new Intent(MainActivity.this,IngrediantActivity.class);
         BakingDetail bakingObject = mBakingList.get(clickedItemIndex);
-
-        intent.putExtra(Intent.EXTRA_TEXT,bakingObject);
+        //Log.i(LOG_MEG,bakingObject.getStepsList().size()+"##");
+        intent.putExtra("T",bakingObject);
 
         startActivity(intent);
     }

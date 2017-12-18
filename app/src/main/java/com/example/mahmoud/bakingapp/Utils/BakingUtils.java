@@ -50,11 +50,13 @@ public class BakingUtils  {
         String stepThumbnailUrl=null;
 
 
-        List<BakingIngrediant> ingrediantList = new ArrayList<>();
-        List<BakingSteps> stepsList = new ArrayList<>();
+
         try {
             JSONArray jsonRoot = new JSONArray(bakingJson);
             for(int i=0;i<jsonRoot.length();i++){
+                List<BakingIngrediant> ingrediantList = new ArrayList<>();
+                List<BakingSteps> stepsList = new ArrayList<>();
+
                 JSONObject jsonObject = jsonRoot.getJSONObject(i);
                 recipeCard = jsonObject.getString("name");
                 servings = jsonObject.getInt("servings");
@@ -89,7 +91,7 @@ public class BakingUtils  {
                                     stepVideoUrl,
                                     stepThumbnailUrl)
                     );
-
+                    //Log.i(LOG_MEG,stepsList.get(k).getStepDescription());
                 }
                 bakingList.add(
                         new BakingDetail(
@@ -99,8 +101,8 @@ public class BakingUtils  {
                                 stepsList
                         )
                 );
-               ingrediantList.clear();
-               stepsList.clear();
+               //ingrediantList.clear();
+               //stepsList.clear();
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -162,6 +164,7 @@ public class BakingUtils  {
         }
         return jsonResponse;
     }
+
     public static List<BakingDetail> fetchBakingData(String requestUrl){
         URL url = createURl(requestUrl);
         String jsonResponse = null;
@@ -171,7 +174,7 @@ public class BakingUtils  {
             e.printStackTrace();
         }
         List<BakingDetail> bakingList = extractBaking(jsonResponse);
-
+        //Log.i(LOG_MEG,bakingList.get(1).getStepsList().get(2).getStepShortDescription());
         return bakingList;
     }
 }

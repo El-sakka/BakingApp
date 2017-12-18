@@ -1,10 +1,13 @@
 package com.example.mahmoud.bakingapp.Model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 /**
  * Created by mahmoud on 18/12/17.
  */
 
-public class BakingSteps {
+public class BakingSteps implements Parcelable{
     int stepId;
     String stepShortDescription;
     String stepDescription;
@@ -21,6 +24,40 @@ public class BakingSteps {
         this.stepVideoUrl = stepVideoUrl;
         this.stepThumbnailUrl = stepThumbnailUrl;
     }
+
+    protected BakingSteps(Parcel in) {
+        stepId = in.readInt();
+        stepShortDescription = in.readString();
+        stepDescription = in.readString();
+        stepVideoUrl = in.readString();
+        stepThumbnailUrl = in.readString();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(stepId);
+        dest.writeString(stepShortDescription);
+        dest.writeString(stepDescription);
+        dest.writeString(stepVideoUrl);
+        dest.writeString(stepThumbnailUrl);
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    public static final Creator<BakingSteps> CREATOR = new Creator<BakingSteps>() {
+        @Override
+        public BakingSteps createFromParcel(Parcel in) {
+            return new BakingSteps(in);
+        }
+
+        @Override
+        public BakingSteps[] newArray(int size) {
+            return new BakingSteps[size];
+        }
+    };
 
     public int getStepId() {
         return stepId;
