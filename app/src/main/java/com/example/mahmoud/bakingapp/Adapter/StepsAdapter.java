@@ -20,10 +20,18 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
     Context mContext;
     BakingDetail mBakingObject;
 
-    public StepsAdapter(Context context, BakingDetail mBakingObject){
+    final private onListItemClickListener onClicklistener;
+
+    public interface onListItemClickListener {
+        void ListItemClicked(int clickedItemIndex);
+    }
+
+    public StepsAdapter(Context context, BakingDetail mBakingObject,onListItemClickListener listener){
         mContext = context;
         this.mBakingObject = mBakingObject;
+        this.onClicklistener = listener;
     }
+
 
     @Override
     public StepsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -51,18 +59,25 @@ public class StepsAdapter extends RecyclerView.Adapter<StepsAdapter.StepsViewHol
         return count;
     }
 
-    public class StepsViewHolder extends RecyclerView.ViewHolder{
+    public class StepsViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView mStepsTextView;
         TextView mDescriptionTextView;
         StepsViewHolder(View itemView){
             super(itemView);
             mStepsTextView = (TextView)itemView.findViewById(R.id.tv_step_number);
             mDescriptionTextView = (TextView)itemView.findViewById(R.id.tv_short_description);
+            itemView.setOnClickListener(this);
         }
         private void bind(final int position){
-            Log.i(LOG_MEG,mBakingObject.getStepsList().get(2).getStepShortDescription());
+           //Log.i(LOG_MEG,mBakingObject.getStepsList().get(2).getStepShortDescription());
             mStepsTextView.append(" #"+mBakingObject.getStepsList().get(position).getStepId());
             mDescriptionTextView.setText(mBakingObject.getStepsList().get(position).getStepShortDescription());
+        }
+
+        @Override
+        public void onClick(View v) {
+            int clickedPosition = getAdapterPosition();
+            onClicklistener.ListItemClicked(clickedPosition);
         }
     }
 }
