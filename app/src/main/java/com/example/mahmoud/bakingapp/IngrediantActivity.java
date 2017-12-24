@@ -61,9 +61,14 @@ public class IngrediantActivity extends AppCompatActivity implements StepsAdapte
 
         mToast.show();
 
+
         Intent intent = new Intent(IngrediantActivity.this,StepActivity.class);
          intent.putExtra("object",bakingObject);
          intent.putExtra("position",clickedItemIndex);
+       // Intent intent2 = new Intent(IngrediantActivity.this,StepFragment.class);
+        //intent2.putExtra("object",bakingObject);
+        //intent2.putExtra("position",clickedItemIndex);
+//        startActivity(intent2);
         startActivity(intent);
     }
 
