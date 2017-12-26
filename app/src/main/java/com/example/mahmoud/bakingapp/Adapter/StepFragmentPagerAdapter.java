@@ -44,4 +44,12 @@ public class StepFragmentPagerAdapter extends FragmentPagerAdapter {
     public int getCount() {
         return mCount;
     }
+
+    @Override
+    public CharSequence getPageTitle(int position) {
+        //return super.getPageTitle(position);
+        return "Step"+position;
+    }
+
+
 }

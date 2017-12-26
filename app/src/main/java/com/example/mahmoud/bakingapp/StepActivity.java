@@ -3,6 +3,7 @@ package com.example.mahmoud.bakingapp;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.net.Uri;
+import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -55,11 +56,8 @@ public class StepActivity extends AppCompatActivity {
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(posotion);
 
-
-       /* getSupportFragmentManager().beginTransaction()
-                .replace(R.id.container, new StepFragment())
-                .commit();
-*/
+        TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);
+        tabLayout.setupWithViewPager(mViewPager);
     }
 
 

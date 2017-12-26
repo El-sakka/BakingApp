@@ -131,7 +131,7 @@ public class StepFragment extends Fragment {
         super.onStop();
         hideSystemUi();
         if((Util.SDK_INT <= 23 || player == null)){
-            initializePlayer();
+            releasePlayer();
         }
     }
 
