@@ -51,8 +51,6 @@ public class StepActivity extends AppCompatActivity {
 
         mAdapter = new StepFragmentPagerAdapter(this,getSupportFragmentManager(),Count,bakingObject,posotion);
 
-
-
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(posotion);
 

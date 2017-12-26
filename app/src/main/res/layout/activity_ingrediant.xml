@@ -7,6 +7,7 @@
     android:orientation="vertical"
     tools:context="com.example.mahmoud.bakingapp.IngrediantActivity">
 
+
     <TextView
         android:id="@+id/tv_tap_ingredient"
         android:text="@string/tap_here_for_this_recipe_s_ingredients"

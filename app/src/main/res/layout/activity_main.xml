@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context="com.example.mahmoud.bakingapp.MainActivity">
 
+
    <android.support.v7.widget.RecyclerView
        android:id="@+id/rv_recipe_card"
        android:layout_width="match_parent"
