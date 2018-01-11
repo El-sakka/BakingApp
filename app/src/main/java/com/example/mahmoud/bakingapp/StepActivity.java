@@ -30,32 +30,49 @@ public class StepActivity extends AppCompatActivity {
 
 
     private static final String LOG_MSG = StepActivity.class.getSimpleName();
+    private static final String BAKING_OBJECT = "baking-object";
+    private static final String POS = "position";
+    private static final String COUNT = "count";
+    private static final String BUNDLE = "bundle";
+
     BakingDetail bakingObject;
     StepFragmentPagerAdapter mAdapter;
     ViewPager mViewPager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.category);
+        setContentView(R.layout.step_fragment);
 
-
-        bakingObject = getIntent().getParcelableExtra("object");
-        int posotion = getIntent().getIntExtra("position",0);
+        Intent sentIntent = getIntent();
+        Bundle bun = sentIntent.getBundleExtra(BUNDLE);
+        bakingObject = bun.getParcelable(BAKING_OBJECT);
+        int posotion = bun.getInt(POS);
 
         //Intent intent = new Intent(this,StepFragment.class);
-        int Count  = bakingObject.getStepsList().size();
+       // int count  = bakingObject.getStepsList().size();
 
-        Log.i(LOG_MSG,posotion+"");
+        StepFragmentPager fragmentPager = new StepFragmentPager();
+        Bundle bundle = new Bundle();
+        bundle.putParcelable(BAKING_OBJECT,bakingObject);
+        bundle.putInt(POS,posotion);
+       // bundle.putInt(COUNT,count);
+        fragmentPager.setArguments(bundle);
+
+        getSupportFragmentManager().beginTransaction().add(R.id.step_fragment_container,fragmentPager).commit();
+
+        Log.i(LOG_MSG,posotion+"");/*
         mViewPager = findViewById(R.id.viewPager);
 
 
-        mAdapter = new StepFragmentPagerAdapter(this,getSupportFragmentManager(),Count,bakingObject,posotion);
+        mAdapter = new StepFragmentPagerAdapter(this,getSupportFragmentManager(),count,bakingObject,posotion);
 
         mViewPager.setAdapter(mAdapter);
         mViewPager.setCurrentItem(posotion);
 
         TabLayout tabLayout =(TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(mViewPager);
+        tabLayout.setupWithViewPager(mViewPager);*/
+
+
     }
 
 

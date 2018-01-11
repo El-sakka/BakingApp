@@ -9,15 +9,15 @@ import android.support.v7.widget.RecyclerView;
 import com.example.mahmoud.bakingapp.Adapter.RecipeAdapter;
 import com.example.mahmoud.bakingapp.Model.BakingDetail;
 
-public class RecipeActivity extends AppCompatActivity {
+public class IngrediantDetails extends AppCompatActivity {
 
-
+    // when taping on ingredient to the the details
     RecyclerView mRecipeRecyclerView;
     RecipeAdapter mAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_recipe);
+        setContentView(R.layout.activity_ingrediant_details);
 
         BakingDetail bakingObject = getIntent().getParcelableExtra(Intent.EXTRA_TEXT);
         mRecipeRecyclerView = (RecyclerView)findViewById(R.id.rv_ingredients);
